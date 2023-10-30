@@ -48,7 +48,7 @@ EXPRESSION = TERM, {("+" | "-" ), TERM};
 
 TERM = FACTOR, {("*" | "/"), FACTOR };
 
-FACTOR = (("+" | "-" | "!"), FACTOR | INT | LETTER | "(", EXPRESSION, ")" | IDENTIFIER | INPUT);
+FACTOR = (("+" | "-" | "!"), FACTOR | INT | STR | "(", EXPRESSION, ")" | IDENTIFIER | INPUT);
 
 IDENTIFIER = LETTER, { LETTER | DIGIT | "_"};
 
