@@ -28,7 +28,7 @@ WHILE = "while", BEXPRESSION, BLOCK;
 
 VAR = TYPE, ":", IDENTIFIER, {"=", BEXPRESSION};
 
-RULE = "rule", ":", IDENTIFIER, "{", {VAR, ",", "\n"}, "\n", "}";
+RULE = "rule", ":", IDENTIFIER, "{", {VAR, ",", "\n"}, "}";
 
 TYPE = (int | str);
 
