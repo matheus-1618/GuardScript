@@ -73,9 +73,11 @@ while: WHILE bexpression block;
 
 var: type DECLARE IDENTIFIER ASSIGN bexpression NEWLINE
    | type DECLARE IDENTIFIER NEWLINE
+   | type DECLARE IDENTIFIER ASSIGN bexpression
+   | type DECLARE IDENTIFIER 
    ;
 
-rule: RULE DECLARE IDENTIFIER LBRACE var_list RBRACE NEWLINE;
+rule: RULE DECLARE IDENTIFIER LBRACE NEWLINE var_list RBRACE NEWLINE;
 
 var_list: var COMMA NEWLINE
         | var_list var COMMA NEWLINE
