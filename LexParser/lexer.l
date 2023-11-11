@@ -1,54 +1,97 @@
 %{
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "parser.tab.h"
+
+char* yyval;
+
 %}
+%option yylineno
+%option noyywrap
+
+
+IF if
+ELSE else
+FOREACH foreach
+TO to
+WHILE while
+SHOW show
+RULE rule
+MATCH match
+SCANHOST scanhost
+TRAFFIC_INFORMATION traffic_information
+INPUT input
+INT int
+STR str
+LPAREN "("
+RPAREN ")"
+LBRACE "{"
+RBRACE "}"
+COMMA ","
+SEMICOLON ";"
+EQ "=="
+GT ">"
+LT "<"
+AND and
+OR or
+PLUS "+"
+MINUS "-"
+TIMES "*"
+DIVIDE "/"
+ASSIGN "="
+NOT "!"
+NUMBER [0-9]
+NEWLINE "\n"
+DECLARE ":"
+IDENTIFIER [a-zA-Z_][a-zA-Z0-9_]*
+STRING \"([^\\\"]|\\.)*\" 
+
 
 %%
+
 [ \t]            ; /* Ignora espaços em branco e tabulações */
-"if"             { printf("IF\n"); }
-"else"           { printf("ELSE\n"); }
-"foreach"        { printf("FOREACH\n"); }
-"to"             { printf("TO\n"); }
-"while"          { printf("WHILE\n"); }
-"show"           { printf("SHOW\n"); }
-"rule"           { printf("RULE\n"); }
-"match"          { printf("MATCH\n"); }
-"scanhost"       { printf("SCANHOST\n"); }
-"traffic_information" { printf("TRAFFIC_INFORMATION\n"); }
-"input"          { printf("INPUT\n"); }
-int              { printf("INT\n"); }
-str              { printf("STR\n"); }
-":"              { printf("DECLARE\n"); }
-"("              { printf("LPAREN\n"); }
-")"              { printf("RPAREN\n"); }
-"{"              { printf("LBRACE\n"); }
-"}"              { printf("RBRACE\n"); }
-","              { printf("COMMA\n"); }
-";"              { printf("SEMICOLON\n"); }
-"=="             { printf("EQ\n"); }
-">"              { printf("GT\n"); }
-"<"              { printf("LT\n"); }
-"&&"             { printf("AND\n"); }
-"||"             { printf("OR\n"); }
-"+"              { printf("PLUS\n"); }
-"-"              { printf("MINUS\n"); }
-"*"              { printf("TIMES\n"); }
-"/"              { printf("DIVIDE\n"); }
-"="              { printf("ASSIGN\n"); }
-"!"              { printf("NOT\n"); }
-[0-9]+           { printf("NUMBER: %s\n", yytext); }
-[a-zA-Z_][a-zA-Z0-9_]* { printf("IDENTIFIER: %s\n", yytext); }
-\"([^\\\"]|\\.)*\" { printf("STRING: %s\n", yytext); }
+"if"             { yyval = strdup(yytext); return IF; }
+"else"           { yyval = strdup(yytext); return ELSE; }
+"foreach"        { yyval = strdup(yytext); return FOREACH; }
+"to"             { yyval = strdup(yytext); return TO; }
+"while"          { yyval = strdup(yytext); return WHILE; }
+"show"           { yyval = strdup(yytext); return SHOW; }
+"rule"           { yyval = strdup(yytext); return RULE; }
+"match"          { yyval = strdup(yytext); return MATCH; }
+"scanhost"       { yyval = strdup(yytext); return SCANHOST; }
+"traffic_information" { yyval = strdup(yytext); return TRAFFIC_INFORMATION; }
+"input"          { yyval = strdup(yytext); return INPUT; }
+":"            { yyval = strdup(yytext); return DECLARE; }
+"int"            { yyval = strdup(yytext); return INT; }
+"str"            { yyval = strdup(yytext); return STR; }
+"("              { yyval = strdup(yytext); return LPAREN; }
+")"              { yyval = strdup(yytext); return RPAREN; }
+"{"              { yyval = strdup(yytext); return LBRACE; }
+"}"              { yyval = strdup(yytext); return RBRACE; }
+","              { yyval = strdup(yytext); return COMMA; }
+";"              { yyval = strdup(yytext); return SEMICOLON; }
+"=="             { yyval = strdup(yytext); return EQ; }
+">"              { yyval = strdup(yytext); return GT; }
+"<"              { yyval = strdup(yytext); return LT; }
+"&&"             { yyval = strdup(yytext); return AND; }
+"||"             { yyval = strdup(yytext); return OR; }
+"+"              { yyval = strdup(yytext); return PLUS; }
+"-"              { yyval = strdup(yytext); return MINUS; }
+"*"              { yyval = strdup(yytext); return TIMES; }
+"/"              { yyval = strdup(yytext); return DIVIDE; }
+"="              { yyval = strdup(yytext); return ASSIGN; }
+"!"              { yyval = strdup(yytext); return NOT; }
+[0-9]+           { yyval = strdup(yytext); return NUMBER; }
+[a-zA-Z_][a-zA-Z0-9_]* { yyval = strdup(yytext); return IDENTIFIER; }
+\"([^\\\"]|\\.)*\" { yyval = strdup(yytext); return STRING; }
 
 "//"(.)*         ; /* Ignora comentários de uma linha */
 
 "\\\n"           ; /* Ignora quebras de linha precedidas por \ */
 
-\n               ; /* Ignora quebras de linha não precedidas por \ */
+\n                { yyval = strdup(yytext); return NEWLINE; }
 
-.               { printf("UNKNOWN CHARACTER: %s\n",yytext); }
+.               { yyval = strdup(yytext); printf("%s",yyval); }
+
 %%
-
-int main() {
-    yylex();
-    return 0;
-}
