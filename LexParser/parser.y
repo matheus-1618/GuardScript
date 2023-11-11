@@ -71,7 +71,7 @@ foreach: FOREACH assigment TO assigment block;
 
 while: WHILE bexpression block;
 
-var: type DECLARE IDENTIFIER  ASSIGN bexpression NEWLINE
+var: type DECLARE IDENTIFIER ASSIGN bexpression NEWLINE
    | type DECLARE IDENTIFIER NEWLINE
    ;
 
@@ -119,7 +119,7 @@ factor: PLUS factor
       | MINUS factor
       | NOT factor
       | INT
-      | STR
+      | STRING
       | LPAREN expression RPAREN
       | IDENTIFIER
       | INPUT LPAREN RPAREN

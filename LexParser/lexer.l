@@ -22,8 +22,8 @@ MATCH match
 SCANHOST scanhost
 TRAFFIC_INFORMATION traffic_information
 INPUT input
-INT int
-STR str
+INT "int"
+STR "str"
 LPAREN "("
 RPAREN ")"
 LBRACE "{"
