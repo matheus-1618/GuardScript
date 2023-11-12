@@ -14,11 +14,11 @@ PROGRAM = { STATEMENT };
 
 BLOCK = { "{", "\n", STATEMENT, "}"};
 
-STATEMENT = ( λ | ASSIGNMENT | CONDITIONAL| PRINT| FOREACH | WHILE | VAR | RULE | MATCH | SCANHOST | TRAFFIC), "\n" ;
+STATEMENT = ( λ | ASSIGNMENT | CONDITIONAL| PRINT| FOREACH | WHILE | VAR | RULE  | TRAFFIC), "\n" ;
 
 ASSIGNMENT = IDENTIFIER, "=", REXPRESSION;
 
-CONDITIONAL= "if", BEXPRESSION, {"else", BLOCK|BLOCK};
+CONDITIONAL= "if", BEXPRESSION, {"else", BLOCK};
 
 PRINT = "show", "(", BEXPRESSION, ")";
 
@@ -32,9 +32,9 @@ RULE = "rule", ":", IDENTIFIER, "{", {VAR, ",", "\n"}, "}";
 
 TYPE = (int | str);
 
-MATCH = "match", "(", VAR ,RULE, ")";
+MATCH = "match", "(", IDENTIFIER , "," , IDENTIFIER , ")";
 
-SCANHOST = "scanhost", "(", VAR, VAR, ")";
+SCANHOST = "scanhost", "(", IDENTIFIER, "," ,IDENTIFIER, ")";
 
 TRAFFIC = "traffic_information", "(", ")";
 
@@ -48,7 +48,7 @@ EXPRESSION = TERM, {("+" | "-" ), TERM};
 
 TERM = FACTOR, {("*" | "/"), FACTOR };
 
-FACTOR = (("+" | "-" | "!"), FACTOR | INT | STR | "(", EXPRESSION, ")" | IDENTIFIER | INPUT);
+FACTOR = (("+" | "-" | "!"), FACTOR | INT | STR | "(", EXPRESSION, ")" | IDENTIFIER | MATCH | SCANHOST | INPUT);
 
 IDENTIFIER = LETTER, { LETTER | DIGIT | "_"};
 
