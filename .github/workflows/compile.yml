@@ -18,6 +18,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y bison flex
 
+    - name: Change directory to LexParser
+      run: cd LexParser
+
     - name: Compile Bison and Flex files
       run: |
         flex lexer.l

@@ -1,5 +1,7 @@
 # GuardScript
 
+![Build](https://github.com/matheus-1618/GuardScript/actions/workflows/compile.yml/badge.svg)
+
 A programming language crafted to aid cybersecurity professionals in their tasks, including:
 
 * Scanning for the presence of malware on a machine.
