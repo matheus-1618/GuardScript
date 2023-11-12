@@ -18,7 +18,7 @@ TO to
 WHILE while
 SHOW show
 RULE rule
-MATCH "match"
+MATCH match
 SCANHOST scanhost
 TRAFFIC_INFORMATION traffic_information
 INPUT input
@@ -86,7 +86,7 @@ STRING \"([^\\\"]|\\.)*\"
 [a-zA-Z_][a-zA-Z0-9_]* { yyval = strdup(yytext); return IDENTIFIER; }
 \"([^\\\"]|\\.)*\" { yyval = strdup(yytext); return STRING; }
 
-"//"(.)*         ; /* Ignora comentários de uma linha */
+"//".*          ; /* Ignora comentários de uma linha */
 
 "\\\n"           ; /* Ignora quebras de linha precedidas por \ */
 

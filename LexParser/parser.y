@@ -44,7 +44,12 @@ void yyerror(const char *s);
 program: statement
         | program statement;
 
-block: LBRACE NEWLINE statement RBRACE NEWLINE;
+block: LBRACE NEWLINE statements RBRACE ;
+
+statements: /* empty */
+          | statement
+          | statements statement
+          ;
 
 statement: /* empty */ 
          | assigment
@@ -54,20 +59,21 @@ statement: /* empty */
          | while
          | var
          | rule
-         | match
-         | scanhost
          | traffic
          ;
 
-assigment: IDENTIFIER ASSIGN rexpression  NEWLINE;
+assigment: IDENTIFIER ASSIGN rexpression  NEWLINE
+          |IDENTIFIER ASSIGN rexpression 
+          ;
 
 conditional: IF bexpression  block
-           | IF bexpression block ELSE block
+           | IF bexpression  block NEWLINE
+           | IF bexpression block ELSE block NEWLINE
            ;
 
 print: SHOW LPAREN bexpression RPAREN NEWLINE;
 
-foreach: FOREACH assigment TO assigment block;
+foreach: FOREACH assigment TO assigment block NEWLINE;
 
 while: WHILE bexpression block;
 
@@ -87,11 +93,11 @@ type: INT
     | STR 
     ;
 
-match: MATCH LPAREN var COMMA IDENTIFIER RPAREN;
+match: MATCH LPAREN IDENTIFIER COMMA IDENTIFIER RPAREN;
 
 scanhost: SCANHOST LPAREN IDENTIFIER COMMA IDENTIFIER RPAREN;
 
-traffic: TRAFFIC_INFORMATION LPAREN RPAREN;
+traffic: TRAFFIC_INFORMATION LPAREN RPAREN NEWLINE;
 
 bexpression: bexpression OR bterm
           | bterm
@@ -104,7 +110,7 @@ bterm: bterm AND rexpression
 rexpression: rexpression EQ expression
            | rexpression GT expression
            | rexpression LT expression
-           | expression
+           | expression 
            ;
 
 expression: expression PLUS term
@@ -120,10 +126,12 @@ term: term TIMES factor
 factor: PLUS factor
       | MINUS factor
       | NOT factor
-      | INT
-      | STRING
+      | NUMBER 
+      | STRING 
       | LPAREN expression RPAREN
-      | IDENTIFIER
+      | IDENTIFIER 
+      | match 
+      | scanhost
       | INPUT LPAREN RPAREN
       ;
 
