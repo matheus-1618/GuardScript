@@ -20,6 +20,7 @@ jobs:
 
     - name: Change directory to LexParser
       run: cd LexParser
+      working-directory: LexParser
 
     - name: Compile Bison and Flex files
       run: |
