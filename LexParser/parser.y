@@ -46,13 +46,11 @@ program: statement
 
 block: LBRACE NEWLINE statements RBRACE ;
 
-statements: /* empty */
-          | statement
+statements: statement
           | statements statement
           ;
 
-statement: /* empty */ 
-         | assigment
+statement: assigment
          | conditional
          | print
          | foreach

@@ -4,10 +4,9 @@
 flex lexer.l
 
 
-#bison -Wcounterexamples  -d parser.y
-bison   -d parser.y
-#gcc -c lex.yy.c -o lexer.o
-#gcc -c parser.tab.c -o parser.o
+bison -Wcounterexamples  -d parser.y
+#bison   -d parser.y
+
 
 #gcc lexer.o parser.o -o parser -lfl 
 
