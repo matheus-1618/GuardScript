@@ -29,7 +29,9 @@ jobs:
       working-directory: LexParser
       run: |
         export YYDEBUG=1
-        ./parser < test_file.gst
+        ./parser < test_file_1.gst
+        ./parser < test_file_2.gst
+        ./parser < test_file_3.gst
 
     - name: Clean up
       working-directory: LexParser

@@ -12,7 +12,9 @@ bison -Wcounterexamples  -d parser.y
 
 gcc lex.yy.c parser.tab.c -o parser
 export YYDEBUG=1
-./parser  < test_file.gst
+./parser  < test_file_1.gst
+./parser  < test_file_2.gst
+./parser  < test_file_3.gst
 
 # Remoção de arquivos temporários
-rm -rf lex.yy.c parser.tab.c parser.tab.h lexer.o parser.o
+#rm -rf lex.yy.c parser.tab.c parser.tab.h lexer.o parser.o
