@@ -11,6 +11,13 @@ A programming language crafted to aid cybersecurity professionals in their tasks
 
 All of this comes with a straightforward and simple syntax that eases the development of programs designed to assist in cybersecurity defense or investigative environments, centralizing initial analyses in a single language and development environment.
 
+<div align=center>
+
+<img src="assets/traffic.gif"/>
+
+</div>
+
+
 ## EBNF
 ```
 PROGRAM = { STATEMENT };
@@ -67,6 +74,10 @@ LETTER = ( a | ... | z | A | .. | Z);
 
 DIGIT = ( 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 );
 ```
+## Tests
+The workflows of this repositories are tests for:
+* Lexical and Syntax analysis using Flex and Bison
+* Semantic analysis and code generation using an simple compiler written in python
 
 ## Examples
 ### Verifying if an executable file is malware or not

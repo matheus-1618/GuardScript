@@ -19,40 +19,42 @@ class Bin_op(Node):
     def __init__(self, value, children:list): #Aqui 
         super().__init__(value, children)
     def evaluate(self)->Node:
+        ch0 = self.children[0].evaluate()
+        ch1 = self.children[1].evaluate()
         if type(self.value) == str:
-            if self.children[0].evaluate()[1] == "string" or self.children[1].evaluate()[1] == "string":
+            if ch0[1] == "string" or ch1[1] == "string":
                 if self.value == ".":
-                    return str(self.children[0].evaluate()[0]) + str(self.children[1].evaluate()[0]), "string"
-            if self.children[0].evaluate()[1] == "string" and self.children[1].evaluate()[1] == "string":
+                    return str(ch0[0][0]) + str(ch1[0]), "string"
+            if ch0[1] == "string" and ch1[1] == "string":
                 if self.value == "==":
-                    return int(self.children[0].evaluate()[0] == self.children[1].evaluate()[0]), "string"
+                    return int(ch0[0] == ch1[0]), "int"
                 if self.value == ">":
-                    return int(self.children[0].evaluate()[0] > self.children[1].evaluate()[0]), "string"
+                    return int(ch0[0] > ch1[0]), "int"
                 if self.value == "<":
-                    return int(self.children[0].evaluate()[0] < self.children[1].evaluate()[0]), "string"
+                    return int(ch0[0] < ch1[0]), "int"
                 else:
                     raise Exception("Error")
-            if self.children[0].evaluate()[1] == "int" and self.children[1].evaluate()[1] == "int":
+            if ch0[1] == "int" and ch1[1] == "int":
                 if self.value == "+":
-                    return self.children[0].evaluate()[0] + self.children[1].evaluate()[0], "int"
+                    return ch0[0] + ch1[0], "int"
                 if self.value == "-":
-                    return self.children[0].evaluate()[0] - self.children[1].evaluate()[0], "int"
+                    return ch0[0] - ch1[0], "int"
                 if self.value == "/":
-                    return self.children[0].evaluate()[0] // self.children[1].evaluate()[0], "int"
+                    return ch0[0] // ch1[0], "int"
                 if self.value == "*":
-                    return self.children[0].evaluate()[0] * self.children[1].evaluate()[0], "int"
+                    return ch0[0] * ch1[0], "int"
                 if self.value == "&&":
-                    return int(self.children[0].evaluate()[0] and self.children[1].evaluate()[0]), "int"
+                    return int(ch0[0] and ch1[0]), "int"
                 if self.value == "||":
-                    return int(self.children[0].evaluate()[0] or self.children[1].evaluate()[0]), "int"
+                    return int(ch0[0] or ch1[0]), "int"
                 if self.value == "==":
-                    return int(self.children[0].evaluate()[0] == self.children[1].evaluate()[0]), "int"
+                    return int(ch0[0] == ch1[0]), "int"
                 if self.value == ">":
-                    return int(self.children[0].evaluate()[0] > self.children[1].evaluate()[0]), "int"
+                    return int(ch0[0] > ch1[0]), "int"
                 if self.value == "<":
-                    return int(self.children[0].evaluate()[0] < self.children[1].evaluate()[0]), "int"
+                    return int(ch0[0] < ch1[0]), "int"
                 if self.value == ".":
-                    return str(self.children[0].evaluate()[0]) + str(self.children[1].evaluate()[0]), "string"
+                    return str(ch0[0]) + str(ch1[0]), "string"
                 else:
                     raise Exception("Error")
         else:
@@ -188,7 +190,7 @@ class Input(Node):
     def __init__(self, value = None, children:list = []): #Aqui 
         super().__init__(value, children)
     def evaluate(self)->Node:
-        return input(),"str"
+        return input(),"string"
 
 class Identifier(Node):
     def __init__(self, value = None, children:list=[]): #Aqui 

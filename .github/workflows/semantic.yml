@@ -21,12 +21,12 @@ jobs:
         sudo apt-get install -y libyara-dev
         pip install yara-python
 
-    - name: Run main.py with test_file.gst
+    - name: Interpreted examples
       working-directory: Interpreted
       run: |
         python3 main.py test_file_1.gst
         echo 8.8.8.8 | python3 main.py test_file_2.gst 
         sudo python3 main.py test_file_3.gst
         python3 main.py test_file_4.gst
-        python3 main.py test_file_5.gst
+        echo windows | python3 main.py test_file_5.gst
         sudo python3 main.py test_file_6.gst
