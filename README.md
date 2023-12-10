@@ -1,6 +1,7 @@
 # GuardScript
 
 ![Build](https://github.com/matheus-1618/GuardScript/actions/workflows/compile.yml/badge.svg)
+![Semantic](https://github.com/matheus-1618/GuardScript/actions/workflows/semantic.yml/badge.svg)
 
 A programming language crafted to aid cybersecurity professionals in their tasks, including:
 
