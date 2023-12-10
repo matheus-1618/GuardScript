@@ -1,3 +1,4 @@
+show("Digite o endereço de ip para verificar: ")
 str:ip_address = input()
 int:port_initial
 int:port_final

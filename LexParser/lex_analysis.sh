@@ -15,6 +15,9 @@ export YYDEBUG=1
 ./parser  < test_file_1.gst
 ./parser  < test_file_2.gst
 ./parser  < test_file_3.gst
+./parser  < test_file_4.gst
+./parser  < test_file_5.gst
+./parser  < test_file_6.gst
 
 # Remoção de arquivos temporários
 #rm -rf lex.yy.c parser.tab.c parser.tab.h lexer.o parser.o

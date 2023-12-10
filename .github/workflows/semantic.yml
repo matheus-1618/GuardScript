@@ -1,0 +1,32 @@
+name: Semantic Analysis and Code generation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python3
+        sudo apt-get install -y yara
+        sudo apt-get install -y libyara-dev
+        pip install yara-python
+
+    - name: Run main.py with test_file.gst
+      working-directory: Interpreted
+      run: |
+        python3 main.py test_file_1.gst
+        python3 main.py test_file_2.gst <<< "8.8.8.8"
+        sudo python3 main.py test_file_3.gst
+        python3 main.py test_file_4.gst
+        python3 main.py test_file_5.gst
+        sudo python3 main.py test_file_6.gst
